@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #0F1115;
+    --foreground: #E2E2E8;
+    
+    --surface: #111317;
+    --surface-level-1: #1A1D24;
+    --surface-level-2: #262B36;
+    --surface-container: #1E2024;
+    --surface-container-high: #282A2E;
+    --surface-container-highest: #333539;
+    --surface-dim: #111317;
+    --surface-bright: #37393E;
+    
+    --primary: #A4E6FF;
+    --primary-container: #00D1FF;
+    --primary-fixed-dim: #4CD6FF;
+    --on-primary: #003543;
+    --on-primary-container: #001F28;
+    
+    --secondary: #4EDEA3;
+    --secondary-container: #00A572;
+    --on-secondary: #003824;
+    
+    --tertiary: #FFD5A5;
+    --tertiary-container: #FFB044;
+    --on-tertiary: #472A00;
+    
+    --error: #FFB4AB;
+    --error-container: #93000A;
+    --on-error: #690005;
+    --on-error-container: #FFDAD6;
+    
+    --outline: #859399;
+    --outline-variant: #333A48;
+    --on-surface: #E2E2E8;
+    --on-surface-variant: #BBC9CF;
+  }
+}
+
+body {
+  background-color: #0F1115;
+  color: #E2E2E8;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Monospace font utility */
+.font-mono,
+.font-label-mono {
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+/* Industrial Surface Levels */
+.surface-level-1 {
+  background-color: #1A1D24;
+  border: 1px solid #333A48;
+}
+
+.surface-level-2 {
+  background-color: #262B36;
+  border: 1px solid #333A48;
+}
+
+.glass-panel {
+  background-color: rgba(38, 43, 54, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid #333A48;
+}
+
+.interactive-row {
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.interactive-row:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Sleek Industrial Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #111317;
+}
+::-webkit-scrollbar-thumb {
+  background: #333539;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3C494E;
+}
+
+/* Radar Scan Line Animation */
+@keyframes radar-sweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-radar {
+  animation: radar-sweep 4s linear infinite;
+}
+
+/* Leaflet Map Dark Inversion & Styling */
+.leaflet-container {
+  background-color: #0F1115 !important;
+  font-family: inherit !important;
+}
+
+.leaflet-tile {
+  filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: #1A1D24 !important;
+  color: #E2E2E8 !important;
+  border: 1px solid #333A48 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
+}
+
+.leaflet-popup-tip {
+  background-color: #1A1D24 !important;
+  border: 1px solid #333A48 !important;
+}
