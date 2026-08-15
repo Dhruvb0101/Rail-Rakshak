@@ -16,4 +16,9 @@ async def get_dashboard_kpis():
         aiDetectionsCapPct=85,
         maintenanceDueCount=42,
         openInspectionsCount=8,
+        liveTrainsCount=47,
+        runningTrainsCount=39,
+        delayedTrainsCount=6,
+        weatherCondition="Heavy Rain",
+        weatherRiskScore=68,
     )

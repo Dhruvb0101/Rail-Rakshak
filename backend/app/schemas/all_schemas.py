@@ -1,6 +1,7 @@
 from typing import Optional, List, Dict, Any
 from pydantic import BaseModel
 
+# ----------------- AI & Defect Schemas -----------------
 class ReasoningFactorSchema(BaseModel):
     title: str
     description: str
@@ -51,6 +52,7 @@ class AnalysisResultResponse(BaseModel):
     modelName: str
     modelVersion: str
 
+# ----------------- Alert Schemas -----------------
 class AlertSchema(BaseModel):
     id: str
     alertCode: str
@@ -69,6 +71,73 @@ class AlertUpdateRequest(BaseModel):
     assignedEngineer: Optional[str] = None
     severity: Optional[str] = None
 
+# ----------------- Live Train Tracking Schemas -----------------
+class TrainApproachingAlertSchema(BaseModel):
+    alertId: str
+    trainNumber: str
+    trainName: str
+    defectId: str
+    defectType: str
+    locationKm: str
+    distanceKm: float
+    speedKmH: float
+    etaMinutes: float
+    etaFormatted: str
+    riskLevel: str  # CRITICAL | HIGH | MEDIUM | LOW
+    recommendedAction: str
+    timestamp: str
+
+class LiveTrainSchema(BaseModel):
+    id: str
+    trainNumber: str
+    trainName: str
+    latitude: float
+    longitude: float
+    speedKmH: float
+    direction: str  # NORTHBOUND | SOUTHBOUND | EASTBOUND | WESTBOUND
+    status: str     # RUNNING | DELAYED | WARNING | STOPPED
+    currentStation: str
+    nextStation: str
+    delayMinutes: int
+    eta: str
+    lastUpdatedSec: int
+    route: str
+    nextStations: List[Dict[str, str]]
+    approachingAlert: Optional[TrainApproachingAlertSchema] = None
+    dataSource: str # RAILRADAR_LIVE | SIMULATION_FALLBACK
+
+# ----------------- Weather Intelligence Schemas -----------------
+class WeatherCurrentSchema(BaseModel):
+    city: str
+    division: str
+    temperatureC: float
+    feelsLikeC: float
+    humidityPct: int
+    windSpeedKmh: float
+    windDirectionDeg: int
+    rainfallMm1h: float
+    visibilityKm: float
+    pressureHpa: int
+    condition: str
+    conditionIcon: str
+    weatherRiskScore: int  # 0 to 100
+    weatherRiskLevel: str  # LOW | MODERATE | HIGH | CRITICAL
+    drainageRisk: str
+    bucklingRisk: str
+    catenaryRisk: str
+    visibilityRisk: str
+    trackImpactSummary: str
+    lastUpdated: str
+    dataSource: str        # OPENWEATHER_LIVE | SIMULATION_FALLBACK
+
+class WeatherForecastItemSchema(BaseModel):
+    time: str
+    temperatureC: float
+    condition: str
+    rainfallMm: float
+    riskScore: int
+
+# ----------------- KPI & Work Orders -----------------
 class KPISummaryResponse(BaseModel):
     trackNetworkKm: float
     trackNetworkChangeKm: float
@@ -80,6 +149,11 @@ class KPISummaryResponse(BaseModel):
     aiDetectionsCapPct: int
     maintenanceDueCount: int
     openInspectionsCount: int
+    liveTrainsCount: int
+    runningTrainsCount: int
+    delayedTrainsCount: int
+    weatherCondition: str
+    weatherRiskScore: int
 
 class WorkOrderCreateRequest(BaseModel):
     riskId: str
