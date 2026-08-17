@@ -33,7 +33,7 @@ def get_supabase_client():
     try:
         from supabase import create_client, Client
         key = settings.SUPABASE_SERVICE_KEY or settings.SUPABASE_KEY
-        _supabase_client: Client = create_client(settings.SUPABASE_URL, key)
+        _supabase_client = create_client(settings.SUPABASE_URL, key)
         logger.info(f"Supabase client connected to {settings.SUPABASE_URL}")
     except Exception as e:
         logger.error(f"Failed to initialize Supabase client: {e}")
